@@ -1,17 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Start } from "./containers/Start";
+import { Quiz } from "./containers/Quiz";
 import apiConfig from "./api";
 function App() {
+  const [isStart, setIsStart] = useState(false);
+  const [api, setApi] = useState("");
+  const [questions, setQuestions] = useState([]);
   const startQuiz = (selectedValues) => {
     const { category, number } = selectedValues;
-    const api = `${apiConfig.baseUrl + apiConfig.amount + number}&${
-      apiConfig.category + category
-    }`;
-    console.log(api);
+    setApi(
+      `${apiConfig.baseUrl + apiConfig.amount + number}&${
+        apiConfig.category + category
+      }`
+    );
+    setIsStart(true);
   };
+
+  useEffect(() => {
+    if (isStart && api !== null) {
+      console.log(api);
+      fetch(api)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.response_code === 0) {
+            setQuestions(data.results);
+          }
+        })
+        .catch((error) => console.log(error));
+    }
+  }, [isStart]);
+
   return (
     <div className="App">
-      <Start startQuiz={startQuiz} />
+      {!isStart && <Start startQuiz={startQuiz} />}
+      {isStart && <Quiz questions={questions} />}
     </div>
   );
 }
