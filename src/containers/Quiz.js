@@ -147,9 +147,11 @@ export const Quiz = ({ questions, finishQuiz }) => {
 
   useEffect(() => {
     if (finished) {
-      // finishQuiz()
+      finishQuiz({ number, correctNum });
+      setCorrectNum(0);
+      setQuestionIndex(0);
     }
-  }, [finished]);
+  }, [finished, correctNum, finishQuiz, number]);
 
   return questions.length > 0 ? (
     <QuizWrapper>

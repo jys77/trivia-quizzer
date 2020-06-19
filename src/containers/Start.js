@@ -3,9 +3,6 @@ import styled from "styled-components";
 import { CATEGORIES, NUMBER } from "../constants";
 
 const StartWrapper = styled.div`
-  /* display: flex;
-  flex-flow: column;
-  align-items: center; */
   position: absolute;
   top: 50%;
   left: 50%;
