@@ -1,24 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React from "react";
+import { Start } from "./containers/Start";
+import apiConfig from "./api";
 function App() {
+  const startQuiz = (selectedValues) => {
+    const { category, number } = selectedValues;
+    const api = `${apiConfig.baseUrl + apiConfig.amount + number}&${
+      apiConfig.category + category
+    }`;
+    console.log(api);
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Start startQuiz={startQuiz} />
     </div>
   );
 }
