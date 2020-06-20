@@ -52,6 +52,10 @@ const QuizWrapper = styled.div`
       padding: 5px;
       width: 290px;
       display: table;
+      transition: all 0.2s ease-in-out;
+      &:hover {
+        transform: scale(1.05);
+      }
       @media (max-width: 767px) {
         width: 100%;
       }
@@ -71,6 +75,7 @@ export const Quiz = ({ questions, finishQuiz }) => {
   const [number, setNumber] = useState(0);
   const [correctNum, setCorrectNum] = useState(0);
   const [finished, setFinished] = useState(false);
+  const [clicked, setClicked] = useState(false);
 
   const refs = useRef([...new Array(4)].map(() => React.createRef()));
 
@@ -109,32 +114,38 @@ export const Quiz = ({ questions, finishQuiz }) => {
   };
 
   const optionHandler = (opt) => {
-    if (!finished && questionIndex < number - 1) {
-      if (isCorrect(opt)) {
-        setCorrectNum(correctNum + 1);
-        correctIndicator(opt);
-      } else {
-        wrongIndicator(opt);
-        correctIndicator(questions[questionIndex].correct_answer);
+    if (!clicked) {
+      if (!finished && questionIndex < number - 1) {
+        if (isCorrect(opt)) {
+          setCorrectNum(correctNum + 1);
+          correctIndicator(opt);
+        } else {
+          wrongIndicator(opt);
+          correctIndicator(questions[questionIndex].correct_answer);
+        }
+        setTimeout(() => {
+          resetIndicator(opt);
+          resetIndicator(questions[questionIndex].correct_answer);
+          setQuestionIndex(questionIndex + 1);
+          setClicked(false);
+        }, 2000);
+        setClicked(true);
+      } else if (questionIndex === number - 1) {
+        if (isCorrect(opt)) {
+          setCorrectNum(correctNum + 1);
+          correctIndicator(opt);
+        } else {
+          wrongIndicator(opt);
+          correctIndicator(questions[questionIndex].correct_answer);
+        }
+        setTimeout(() => {
+          resetIndicator(opt);
+          resetIndicator(questions[questionIndex].correct_answer);
+          setFinished(true);
+          setClicked(false);
+        }, 2000);
+        setClicked(true);
       }
-      setTimeout(() => {
-        resetIndicator(opt);
-        resetIndicator(questions[questionIndex].correct_answer);
-        setQuestionIndex(questionIndex + 1);
-      }, 2000);
-    } else if (questionIndex === number - 1) {
-      if (isCorrect(opt)) {
-        setCorrectNum(correctNum + 1);
-        correctIndicator(opt);
-      } else {
-        wrongIndicator(opt);
-        correctIndicator(questions[questionIndex].correct_answer);
-      }
-      setTimeout(() => {
-        resetIndicator(opt);
-        resetIndicator(questions[questionIndex].correct_answer);
-        setFinished(true);
-      }, 2000);
     }
   };
 

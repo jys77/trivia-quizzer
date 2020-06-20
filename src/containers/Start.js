@@ -54,6 +54,10 @@ const StartWrapper = styled.div`
       font-weight: 500;
       width: 100px;
       height: 60px;
+      transition: all 0.2s ease-in-out;
+      &:hover {
+        transform: scale(1.1);
+      }
     }
   }
 `;
