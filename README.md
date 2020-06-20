@@ -2,15 +2,15 @@
 
 A quiz application built with React and using [Open Trivia Database](https://opentdb.com/api_config.php) API.
 
-## Overview
+## Overview - [Demo](https://trivia-quizzer.netlify.app/)
  ### Preview
 
  <p align="center">
-  <img src="../trivia-quizzer/doc/images/start.png" alt='QuizApp in Action'>
+  <img src="./doc/images/start.png" alt='Start Page'>
 </p>
 
 <p align="center">
-  <img src="../trivia-quizzer/doc/images/quiz.png" alt='QuizApp in Action'>
+  <img src="./doc/images/quiz.png" alt='Quiz Page'>
 </p>
 
 ## Getting Started
@@ -23,7 +23,7 @@ A quiz application built with React and using [Open Trivia Database](https://ope
 ### Build/Run
 
 ```javascript
-// Install dependencies
+//Install dependencies
 yarn
 
 //Run app in dev
