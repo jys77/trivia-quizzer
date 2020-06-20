@@ -33,7 +33,7 @@ export const Footer = () => {
   return (
     <FooterWrapper>
       <div>
-        Welcome to star or folk it on{" "}
+        Welcome to star or fork it on{" "}
         <a href="https://github.com/jys77/trivia-quizzer" target="__blank">
           GitHub
         </a>
