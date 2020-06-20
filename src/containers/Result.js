@@ -54,6 +54,9 @@ const ResultWrapper = styled.div`
       transition: all 0.2s ease-in-out;
       &:hover {
         transform: scale(1.1);
+        @media (max-width: 767px) {
+          transform: scale(1);
+        }
       }
       @media (max-width: 767px) {
         width: 100%;
