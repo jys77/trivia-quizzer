@@ -51,6 +51,10 @@ const ResultWrapper = styled.div`
       font-size: 1.5rem;
       text-align: center;
       width: 48%;
+      transition: all 0.2s ease-in-out;
+      &:hover {
+        transform: scale(1.1);
+      }
       @media (max-width: 767px) {
         width: 100%;
         margin-bottom: 1rem;

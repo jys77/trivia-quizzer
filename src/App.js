@@ -3,6 +3,7 @@ import { Start } from "./containers/Start";
 import { Quiz } from "./containers/Quiz";
 import { Result } from "./containers/Result";
 import apiConfig from "./api";
+import { Footer } from "./components/Footer";
 function App() {
   const [isStart, setIsStart] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
@@ -70,6 +71,7 @@ function App() {
           backHome={backHome}
         />
       )}
+      <Footer />
     </div>
   );
 }
