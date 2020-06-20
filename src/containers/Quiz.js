@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { Loader } from "../components/Loader";
+import { ProgressBar } from "../components/ProgressBar";
 
 const QuizWrapper = styled.div`
   position: absolute;
@@ -153,32 +154,39 @@ export const Quiz = ({ questions, finishQuiz }) => {
     }
   }, [finished, correctNum, finishQuiz, number]);
 
+  const percentage = () => {
+    return (100 * (questionIndex + 1)) / number;
+  };
+
   return questions.length > 0 ? (
-    <QuizWrapper>
-      <div className="question-outer">
-        <div
-          className="question-inner"
-          dangerouslySetInnerHTML={{
-            __html: questions[questionIndex].question,
-          }}
-        ></div>
-      </div>
-      <div className="options">
-        {options.map((opt, i) => (
+    <>
+      <ProgressBar percent={percentage} />
+      <QuizWrapper>
+        <div className="question-outer">
           <div
-            key={opt}
-            onClick={() => optionHandler(opt)}
-            className="option-outer"
-            ref={refs.current[i]}
-          >
+            className="question-inner"
+            dangerouslySetInnerHTML={{
+              __html: questions[questionIndex].question,
+            }}
+          ></div>
+        </div>
+        <div className="options">
+          {options.map((opt, i) => (
             <div
-              className="option-inner"
-              dangerouslySetInnerHTML={{ __html: opt }}
-            ></div>
-          </div>
-        ))}
-      </div>
-    </QuizWrapper>
+              key={opt}
+              onClick={() => optionHandler(opt)}
+              className="option-outer"
+              ref={refs.current[i]}
+            >
+              <div
+                className="option-inner"
+                dangerouslySetInnerHTML={{ __html: opt }}
+              ></div>
+            </div>
+          ))}
+        </div>
+      </QuizWrapper>
+    </>
   ) : (
     <Loader />
   );
